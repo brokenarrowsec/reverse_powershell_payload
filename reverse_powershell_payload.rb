@@ -1,6 +1,6 @@
 #!/bin/ruby
 
-system("ruby reverse_powershell_payload.rb")
+system("ruby generator.rb")
 system("mv powershell_reverse_ducky.txt reverse_powershell_payload.txt")
 system("tail -n+7 reverse_powershell_payload.txt > reverse_powershell_payload.tmp")
 system("rm reverse_powershell_payload.txt")
